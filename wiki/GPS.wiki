@@ -1,0 +1,14 @@
+#summary How PockeTwit integrates GPS with Twitter
+
+= Introduction =
+
+If your phone has GPS enabled, PockeTwit can use your current location to communicate with other twitter users in your area.  Here's how it works.
+
+
+= Details =
+
+1.  If GPS is enabled and you have "Update Location" checked when setting your status, it will place your current coordinates in the "Location" field of your user profile.  This makes your tweets appear in location-based searches at search.twitter.com.
+
+2.  In addition to putting your location in the profile, you can insert a shortened url link to google maps indicating that location into your tweet.
+
+3.  If GPS is enabled you can search for tweets from user's who's profile lists them as within a certain range of your own location.

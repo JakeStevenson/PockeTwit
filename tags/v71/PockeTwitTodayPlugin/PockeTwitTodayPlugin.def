@@ -1,0 +1,5 @@
+LIBRARY    PockeTwitTodayPlugin
+
+EXPORTS
+    PluginWndProc               @100  NONAME
+    InitializeCustomItem        @240  NONAME

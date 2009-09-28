@@ -1,0 +1,15 @@
+C:\Users\mws\Development\PocketTwit\CustomInstallLib\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\mws\Development\PocketTwit\CustomInstallLib\bin\Debug\CustomInstallLib.dll
+C:\Users\mws\Development\PocketTwit\CustomInstallLib\bin\Debug\CustomInstallLib.pdb
+C:\Users\mws\Development\PocketTwit\CustomInstallLib\obj\Debug\CustomInstallLib.dll
+C:\Users\mws\Development\PocketTwit\CustomInstallLib\obj\Debug\CustomInstallLib.pdb
+C:\Users\jakes\Documents\Visual Studio 2008\Projects\PockeTwit Trunk\CustomInstallLib\bin\Debug\CustomInstallLib.dll
+C:\Users\jakes\Documents\Visual Studio 2008\Projects\PockeTwit Trunk\CustomInstallLib\bin\Debug\CustomInstallLib.pdb
+C:\Users\jakes\Documents\Visual Studio 2008\Projects\PockeTwit Trunk\CustomInstallLib\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\jakes\Documents\Visual Studio 2008\Projects\PockeTwit Trunk\CustomInstallLib\obj\Debug\CustomInstallLib.dll
+C:\Users\jakes\Documents\Visual Studio 2008\Projects\PockeTwit Trunk\CustomInstallLib\obj\Debug\CustomInstallLib.pdb
+D:\pocketwit\CustomInstallLib\bin\Debug\CustomInstallLib.dll
+D:\pocketwit\CustomInstallLib\bin\Debug\CustomInstallLib.pdb
+D:\pocketwit\CustomInstallLib\obj\Debug\ResolveAssemblyReference.cache
+D:\pocketwit\CustomInstallLib\obj\Debug\CustomInstallLib.dll
+D:\pocketwit\CustomInstallLib\obj\Debug\CustomInstallLib.pdb

@@ -1,0 +1,566 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{293BAAE4-E497-44C9-8EAD-81DD4064C588}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PockeTwit</RootNamespace>
+    <AssemblyName>PockeTwit</AssemblyName>
+    <ProjectTypeGuids>{4D628B5B-2FBC-4AA6-8C16-197242AEB884};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <PlatformFamilyName>PocketPC</PlatformFamilyName>
+    <PlatformID>4118C335-430C-497f-BE48-11C3316B135E</PlatformID>
+    <OSVersion>5.01</OSVersion>
+    <DeployDirSuffix>PockeTwit</DeployDirSuffix>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <NativePlatformName>Windows Mobile 5.0 Pocket PC SDK</NativePlatformName>
+    <FormFactorID>
+    </FormFactorID>
+    <ApplicationIcon>PockeTwit.ico</ApplicationIcon>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>PockeTwitKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;PocketPC</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <FileAlignment>512</FileAlignment>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>off</GenerateSerializationAssemblies>
+    <ApplicationIcon>PockeTwit.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;$(PlatformFamilyName)</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <FileAlignment>512</FileAlignment>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>off</GenerateSerializationAssemblies>
+    <ApplicationIcon>PockeTwit.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DevBuild|AnyCPU' ">
+    <ApplicationIcon>PockeTwitDev.ico</ApplicationIcon>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <GenerateSerializationAssemblies>off</GenerateSerializationAssemblies>
+    <OutputPath>bin\DevBuild\</OutputPath>
+    <DefineConstants>TRACE;PocketPC</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CustomMarshalers" />
+    <Reference Include="Microsoft.WindowsCE.Forms" />
+    <Reference Include="Microsoft.WindowsMobile, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="Microsoft.WindowsMobile.Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="Microsoft.WindowsMobile.PocketOutlook, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="Microsoft.WindowsMobile.Status, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.60.0, Culture=neutral, PublicKeyToken=1fdb50b1b62b4c84, processorArchitecture=MSIL" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataGrid" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ArtHandling\ThrottledArtGrabber.cs" />
+    <Compile Include="CrashReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CrashReport.Designer.cs">
+      <DependentUpon>CrashReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Errors.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Errors.Designer.cs">
+      <DependentUpon>Errors.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FingerUI\Gradient\MSDNGradient.cs" />
+    <Compile Include="FingerUI\Gradient\Win32Helper.cs" />
+    <Compile Include="FingerUI\Popup.cs" />
+    <Compile Include="FingerUI\Menu\SideMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GlobalEventHandler.cs" />
+    <Compile Include="GPS\DegreesMinutesSeconds.cs" />
+    <Compile Include="GPS\DeviceStateChangedEventArgs.cs" />
+    <Compile Include="GPS\GPS.cs" />
+    <Compile Include="GPS\GpsDeviceState.cs" />
+    <Compile Include="GPS\GpsPosition.cs" />
+    <Compile Include="GPS\LocationChangedEventArgs.cs" />
+    <Compile Include="GPS\Utils.cs" />
+    <Compile Include="LED.cs" />
+    <Compile Include="LocationManager.cs" />
+    <Compile Include="NotificationsCode\NotificationHandler.cs" />
+    <Compile Include="NotificationsCode\NotificationSoftKeys\NotificationMessageWindow.cs" />
+    <Compile Include="NotificationsCode\NotificationSoftKeys\NotificationSoftKey.cs" />
+    <Compile Include="NotificationsCode\NotificationSoftKeys\NotificationWithSoftKeys.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NotificationsCode\NotificationSoftKeys\SHNOTIFICATIONDATA.cs" />
+    <Compile Include="NotificationsCode\NotificationSoftKeys\SpinnerClickEventHandler.cs" />
+    <Compile Include="OpenNetCF\EventWaitHandle.cs" />
+    <Compile Include="OpenNetCF\LargeIntervalTimer.cs" />
+    <Compile Include="OpenNetCF\NativeMethods.cs" />
+    <Compile Include="SettingsHandler\AccountInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsHandler\AccountInfoForm.Designer.cs">
+      <DependentUpon>AccountInfoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsHandler\AccountsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsHandler\AccountsForm.Designer.cs">
+      <DependentUpon>AccountsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FingerUI\Menu\ClickablesMenu.cs">
+    </Compile>
+    <Compile Include="DetectDevice.cs" />
+    <Compile Include="FingerUI\KListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FingerUI\StatusItem.cs" />
+    <Compile Include="Following.cs" />
+    <Compile Include="is.gd.cs" />
+    <Compile Include="Library\Tweet.cs" />
+    <Compile Include="SearchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchForm.Designer.cs">
+      <DependentUpon>SearchForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsHandler\AvatarSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsHandler\AvatarSettings.Designer.cs">
+      <DependentUpon>AvatarSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsHandler\OtherSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsHandler\OtherSettings.Designer.cs">
+      <DependentUpon>OtherSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsHandler\ThemeCreator\ColorPick.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsHandler\ThemeCreator\ColorPick.designer.cs">
+      <DependentUpon>ColorPick.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsHandler\ThemeCreator\NewThemeName.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsHandler\ThemeCreator\NewThemeName.Designer.cs">
+      <DependentUpon>NewThemeName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsHandler\UISettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsHandler\UISettings.Designer.cs">
+      <DependentUpon>UISettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sound.cs" />
+    <Compile Include="Contributors.cs" />
+    <Compile Include="Themes\FormColors.cs" />
+    <Compile Include="TimeLines\TimelineManagement.cs" />
+    <Compile Include="TweetList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TweetList.Designer.cs">
+      <DependentUpon>TweetList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsHandler\AccountInfoForm.resx">
+      <DependentUpon>AccountInfoForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsHandler\AccountsForm.resx">
+      <DependentUpon>AccountsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchForm.resx">
+      <DependentUpon>SearchForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TweetList.resx">
+      <DependentUpon>TweetList.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AutoUpgrade\UpgradeForm.resx">
+      <DependentUpon>UpgradeForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="URLForm.resx">
+      <DependentUpon>URLForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="SettingsHandler\appconfig.cs" />
+    <Compile Include="SettingsHandler\Settings.cs" />
+    <Compile Include="AutoUpgrade\UpgradeChecker.cs" />
+    <Compile Include="AutoUpgrade\UpgradeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AutoUpgrade\UpgradeForm.Designer.cs">
+      <DependentUpon>UpgradeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="URLForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="URLForm.Designer.cs">
+      <DependentUpon>URLForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Yedda\HtmlEntities.cs" />
+    <Compile Include="Yedda\HttpUtility.cs" />
+    <Compile Include="Yedda\ShortText.cs" />
+    <Compile Include="Yedda\Skweezer.cs" />
+    <Compile Include="Yedda\TwitPic.cs" />
+    <Compile Include="Yedda\Twitter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="asterisk_yellow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="DefineGroup.resx">
+      <DependentUpon>DefineGroup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EmailStatusForm.resx">
+      <DependentUpon>EmailStatusForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImagePreview.resx">
+      <DependentUpon>ImagePreview.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Marker.png" />
+    <Content Include="default_profile_bigger.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SQLite.Interop.060.DLL">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Themes\DeepPurple\DeepPurple.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Themes\Mint\Mint.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Themes\Ice\Ice.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Themes\Sunny\Sunny.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Themes\Light\address.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Themes\Light\insertlink.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Themes\Light\wait.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Themes\NoGradient\NoGradient.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Themes\Light\Light.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Themes\Light\existingimage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Themes\Light\map.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Themes\Light\takepicture.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Themes\Light\url.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Themes\Original\address.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Themes\Original\insertlink.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Themes\Original\map.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Themes\Original\Original.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="laconicaservers.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="CrashReport.resx">
+      <DependentUpon>CrashReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Errors.resx">
+      <DependentUpon>Errors.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FingerUI\FullScreenTweet.resx">
+      <DependentUpon>FullScreenTweet.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PostUpdate.resx">
+      <DependentUpon>PostUpdate.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProfileMap.resx">
+      <DependentUpon>ProfileMap.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProfileView.resx">
+      <DependentUpon>ProfileView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\MyIco.ico" />
+    <EmbeddedResource Include="SettingsHandler\AdvancedForm.resx">
+      <DependentUpon>AdvancedForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsHandler\AvatarSettings.resx">
+      <DependentUpon>AvatarSettings.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsHandler\GroupManagement.resx">
+      <DependentUpon>GroupManagement.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsHandler\MediaService.resx">
+      <DependentUpon>MediaService.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsHandler\NotificationSettings.resx">
+      <DependentUpon>NotificationSettings.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsHandler\OtherSettings.resx">
+      <DependentUpon>OtherSettings.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsHandler\ThemeCreator\ColorPick.resx">
+      <DependentUpon>ColorPick.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsHandler\ThemeCreator\NewThemeName.resx">
+      <DependentUpon>NewThemeName.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsHandler\UISettings.resx">
+      <DependentUpon>UISettings.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="userListControl.resx">
+      <DependentUpon>userListControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Content Include="PockeTwit.ico" />
+    <Content Include="Themes\Original\existingimage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Themes\Original\takepicture.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Themes\Original\url.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="PockeTwitKey.snk" />
+    <None Include="TiledMaps\GoogleMaps\SampleDecodedSegments.xml" />
+    <Content Include="Themes\Original\wait.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="unknownart-small.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddressBook.cs" />
+    <Compile Include="DefineGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DefineGroup.Designer.cs">
+      <DependentUpon>DefineGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Blog\BlogDelegates.cs" />
+    <Compile Include="Blog\BlogObjects.cs" />
+    <Compile Include="Blog\BlogPostObject.cs" />
+    <Compile Include="Blog\BlogServiceBase.cs" />
+    <Compile Include="Blog\BlogServiceFactory.cs" />
+    <Compile Include="Blog\IBlogPostService.cs" />
+    <Compile Include="Blog\OAuth.cs" />
+    <Compile Include="Blog\TwitPic.cs" />
+    <Compile Include="EmailStatusForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EmailStatusForm.Designer.cs">
+      <DependentUpon>EmailStatusForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FingerUI\FullScreenTweet.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FingerUI\FullScreenTweet.Designer.cs">
+      <DependentUpon>FullScreenTweet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FingerUI\Menu\SideMenuItem.cs" />
+    <Compile Include="FingerUI\Portal.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GraphicsLibs\DetermineColorDepth.cs" />
+    <Compile Include="GraphicsLibs\DIB.cs" />
+    <Compile Include="GroupingCode.cs" />
+    <Compile Include="ImagePreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImagePreview.Designer.cs">
+      <DependentUpon>ImagePreview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LocalStorage\DataBaseUtility.cs" />
+    <Compile Include="NotificationsCode\NotificationTexts.cs" />
+    <Compile Include="OpenNetCF\LED.cs" />
+    <Compile Include="OpenNetCF\Notify.cs" />
+    <Compile Include="OpenNetCF\SYSTEMTIME.cs" />
+    <Compile Include="OpenNetCF\UserNotification.cs" />
+    <Compile Include="OpenNetCF\UserNotificationInfoHeader.cs" />
+    <Compile Include="OpenNetCF\UserNotificationTrigger.cs" />
+    <Compile Include="OpenNetCF\WaitHandle.cs" />
+    <Compile Include="PostUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PostUpdate.Designer.cs">
+      <DependentUpon>PostUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProfileMap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProfileMap.Designer.cs">
+      <DependentUpon>ProfileMap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProfileView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProfileView.Designer.cs">
+      <DependentUpon>ProfileView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsHandler\AdvancedForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsHandler\AdvancedForm.Designer.cs">
+      <DependentUpon>AdvancedForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsHandler\BaseSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsHandler\BaseSettingsForm.Designer.cs">
+      <DependentUpon>BaseSettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsHandler\GroupManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsHandler\GroupManagement.Designer.cs">
+      <DependentUpon>GroupManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsHandler\MediaService.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsHandler\MediaService.Designer.cs">
+      <DependentUpon>MediaService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsHandler\NotificationSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsHandler\NotificationSettings.Designer.cs">
+      <DependentUpon>NotificationSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestCode\TestStatusMaker.cs" />
+    <Compile Include="TiledMaps\CompositeTiledMapSession.cs" />
+    <Compile Include="TiledMaps\Directions.cs" />
+    <Compile Include="TiledMaps\Geocode.cs" />
+    <Compile Include="TiledMaps\GoogleMaps\GoogleMapSession.cs" />
+    <Compile Include="TiledMaps\GoogleMaps\GoogleRoadsSession.cs" />
+    <Compile Include="TiledMaps\GoogleMaps\GoogleSatelliteSession.cs" />
+    <Compile Include="TiledMaps\GoogleMaps\GoogleServices.cs" />
+    <Compile Include="TiledMaps\GoogleMaps\GoogleTerrainSession.cs" />
+    <Compile Include="TiledMaps\GoogleMaps\GoogleTrafficSession.cs" />
+    <Compile Include="TiledMaps\GraphicsRenderer.cs" />
+    <Compile Include="TiledMaps\HttpMapSession.cs" />
+    <Compile Include="TiledMaps\IImage.cs" />
+    <Compile Include="TiledMaps\MapOverlay.cs" />
+    <Compile Include="TiledMaps\TiledMapSession.cs" />
+    <Compile Include="TiledMaps\userMapDrawable.cs" />
+    <Compile Include="TiledMaps\userMapOverlay.cs" />
+    <Compile Include="TimeLines\LastSelectedItems.cs" />
+    <Compile Include="userListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="userListControl.Designer.cs">
+      <DependentUpon>userListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Yedda\PictureServiceBase.cs" />
+    <Compile Include="Yedda\PikChur.cs" />
+    <Compile Include="Yedda\PixIm.cs" />
+    <Compile Include="Yedda\TwitGoo.cs" />
+    <Compile Include="Yedda\yFrog.cs" />
+    <Compile Include="Yedda\GoogleMaps.cs" />
+    <Compile Include="Yedda\GoogleTranslate.cs" />
+    <Compile Include="Yedda\IPictureService.cs" />
+    <Compile Include="Yedda\MobyPicture.cs" />
+    <Compile Include="Yedda\PicturePostObject.cs" />
+    <Compile Include="Yedda\PictureServiceFactory.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}">
+        <HostingProcess disable="1" />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

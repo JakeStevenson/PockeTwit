@@ -1,0 +1,19 @@
+#summary PockeTwit has some unusual UI concepts.
+
+= Introduction =
+
+I didn't want the iphone folks to have all the fun, so PockeTwit doesn't follow all the usual windows mobile UI conventions.
+
+= Kinetic List = 
+
+The main list implements "kinetic scrolling".  You can drag your finger across the screen and the page follows along, as if you were pushing the content around.  If you lift your finger while the screen is moving, it will continue to move for some time, as if you "threw" the content in that direction.
+
+= Side Menus = 
+
+Action menus are located to the sides of the main menu.  So if you drag the list to the left or right, you will see the a menu of actions beside the list.
+
+The left menu items are "global" and do not reference a specific tweet.  This includes updating your status, switching timelines, etc.
+
+The right menu items relate to a specific tweet.  Select a tweet from the list, then scroll to the right menu and choose the action you want to perform on that tweet.
+
+There is also a "context menu" that pops-up when double-tapping an item or using the d-pad to click an item.  This contains links "inside" the item, like @reply names, html links, and the ability to display the item full-screen.

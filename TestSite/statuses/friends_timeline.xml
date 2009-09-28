@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<statuses type="array">
+<status>
+  <created_at>Tue Jan 20 03:13:24 +0000 2009</created_at>
+  <id>1132202494</id>
+  <text>1</text>
+  <source>&lt;a href="http://iconfactory.com/software/twitterrific"&gt;twitterrific&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>1183041</id>
+    <name>Wil Wheaton</name>
+    <screen_name>wilw</screen_name>
+    <location>Los Angeles</location>
+    <description>I'm just this guy, you know?</description>
+    <profile_image_url>http://s3.amazonaws.com/twitter_production/profile_images/62182638/Picture_4_normal.png</profile_image_url>
+    <url>http://wilwheaton.typepad.com</url>
+    <protected>false</protected>
+    <followers_count>37535</followers_count>
+  </user>
+</status>
+<status>
+  <created_at>Tue Jan 20 03:08:09 +0000 2009</created_at>
+  <id>1132190513</id>
+  <text>2</text>
+  <source>&lt;a href=&quot;http://code.google.com/p/wittytwitter/&quot;&gt;Witty&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>13479972</id>
+    <name>Scott Allen</name>
+    <screen_name>OdeToCode</screen_name>
+    <location>Hagerstown, Maryland</location>
+    <description>More experiments in writing</description>
+    <profile_image_url>http://s3.amazonaws.com/twitter_production/profile_images/68748217/ksacar_normal.jpg</profile_image_url>
+    <url>http://www.OdeToCode.com/blogs/scott/</url>
+    <protected>false</protected>
+    <followers_count>828</followers_count>
+  </user>
+</status>
+<status>
+  <created_at>Tue Jan 20 02:58:46 +0000 2009</created_at>
+  <id>1132167801</id>
+  <text>3</text>
+  <source>&lt;a href=&quot;http://code.google.com/p/wittytwitter/&quot;&gt;Witty&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>13479972</id>
+    <name>Scott Allen</name>
+    <screen_name>OdeToCode</screen_name>
+    <location>Hagerstown, Maryland</location>
+    <description>More experiments in writing</description>
+    <profile_image_url>http://s3.amazonaws.com/twitter_production/profile_images/68748217/ksacar_normal.jpg</profile_image_url>
+    <url>http://www.OdeToCode.com/blogs/scott/</url>
+    <protected>false</protected>
+    <followers_count>828</followers_count>
+  </user>
+</status>
+<status>
+  <created_at>Tue Jan 20 02:56:01 +0000 2009</created_at>
+  <id>1132161409</id>
+  <text>4</text>
+  <source>&lt;a href=&quot;http://iconfactory.com/software/twitterrific&quot;&gt;twitterrific&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>1183041</id>
+    <name>Wil Wheaton</name>
+    <screen_name>wilw</screen_name>
+    <location>Los Angeles</location>
+    <description>I'm just this guy, you know?</description>
+    <profile_image_url>http://s3.amazonaws.com/twitter_production/profile_images/62182638/Picture_4_normal.png</profile_image_url>
+    <url>http://wilwheaton.typepad.com</url>
+    <protected>false</protected>
+    <followers_count>37522</followers_count>
+  </user>
+</status>
+<status>
+  <created_at>Tue Jan 20 02:53:53 +0000 2009</created_at>
+  <id>1132156535</id>
+  <text>5</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>5637652</id>
+    <name>Jeff Atwood</name>
+    <screen_name>codinghorror</screen_name>
+    <location>Bay Area, CA</location>
+    <description>Is it more interesting to talk about software than it is to develop software?</description>
+    <profile_image_url>http://s3.amazonaws.com/twitter_production/profile_images/58911850/coding-horror-gravatar-128_normal.png</profile_image_url>
+    <url>http://www.codinghorror.com/blog</url>
+    <protected>false</protected>
+    <followers_count>8215</followers_count>
+  </user>
+</status>
+<status>
+  <created_at>Tue Jan 20 02:46:17 +0000 2009</created_at>
+  <id>1132140996</id>
+  <text>6</text>
+  <source>&lt;a href=&quot;http://iconfactory.com/software/twitterrific&quot;&gt;twitterrific&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>1183041</id>
+    <name>Wil Wheaton</name>
+    <screen_name>wilw</screen_name>
+    <location>Los Angeles</location>
+    <description>I'm just this guy, you know?</description>
+    <profile_image_url>http://s3.amazonaws.com/twitter_production/profile_images/62182638/Picture_4_normal.png</profile_image_url>
+    <url>http://wilwheaton.typepad.com</url>
+    <protected>false</protected>
+    <followers_count>37517</followers_count>
+  </user>
+</status>
+<status>
+  <created_at>Tue Jan 20 02:34:07 +0000 2009</created_at>
+  <id>1132117987</id>
+  <text>7</text>
+  <source>&lt;a href=&quot;http://iconfactory.com/software/twitterrific&quot;&gt;twitterrific&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>1183041</id>
+    <name>Wil Wheaton</name>
+    <screen_name>wilw</screen_name>
+    <location>Los Angeles</location>
+    <description>I'm just this guy, you know?</description>
+    <profile_image_url>http://s3.amazonaws.com/twitter_production/profile_images/62182638/Picture_4_normal.png</profile_image_url>
+    <url>http://wilwheaton.typepad.com</url>
+    <protected>false</protected>
+    <followers_count>37502</followers_count>
+  </user>
+</status>
+<status>
+  <created_at>Tue Jan 20 02:27:11 +0000 2009</created_at>
+  <id>1132104978</id>
+  <text>8</text>
+  <source>&lt;a href=&quot;http://iconfactory.com/software/twitterrific&quot;&gt;twitterrific&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>1183041</id>
+    <name>Wil Wheaton</name>
+    <screen_name>wilw</screen_name>
+    <location>Los Angeles</location>
+    <description>I'm just this guy, you know?</description>
+    <profile_image_url>http://s3.amazonaws.com/twitter_production/profile_images/62182638/Picture_4_normal.png</profile_image_url>
+    <url>http://wilwheaton.typepad.com</url>
+    <protected>false</protected>
+    <followers_count>37498</followers_count>
+  </user>
+</status>
+<status>
+  <created_at>Tue Jan 20 02:19:34 +0000 2009</created_at>
+  <id>1132090492</id>
+  <text>9</text>
+  <source>&lt;a href="http://iconfactory.com/software/twitterrific"&gt;twitterrific&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>1183041</id>
+    <name>Wil Wheaton</name>
+    <screen_name>wilw</screen_name>
+    <location>Los Angeles</location>
+    <description>I'm just this guy, you know?</description>
+    <profile_image_url>http://s3.amazonaws.com/twitter_production/profile_images/62182638/Picture_4_normal.png</profile_image_url>
+    <url>http://wilwheaton.typepad.com</url>
+    <protected>false</protected>
+    <followers_count>37494</followers_count>
+  </user>
+</status>
+<status>
+  <created_at>Tue Jan 20 02:17:26 +0000 2009</created_at>
+  <id>1132086237</id>
+  <text>10</text>
+  <source>&lt;a href="http://www.destroytoday.com/?p=Project&amp;id=DestroyTwitter"&gt;DestroyTwitter&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>14133001</id>
+    <name>Ben Scheirman</name>
+    <screen_name>subdigital</screen_name>
+    <location>Houston</location>
+    <description>a web developer from Houston</description>
+    <profile_image_url>http://s3.amazonaws.com/twitter_production/profile_images/66175257/Picture_1-1_normal.jpg</profile_image_url>
+    <url>http://flux88.com</url>
+    <protected>false</protected>
+    <followers_count>546</followers_count>
+  </user>
+</status>
+</statuses>

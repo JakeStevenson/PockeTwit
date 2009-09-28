@@ -1,0 +1,60 @@
+#summary How to make PockeIE the Default Browser for the Device
+
+= Introduction =
+
+Sometimes another browser is installed that changes the default web browser for the device from PocketIE.  When that new browser is uninstalled, it doesn't always set PocketIE back to be the default browser.  This means PockeTwit can't launch URLs anymore because the OS doesn't know how to handle the links.
+
+
+
+= Details =
+
+These registry entries control how WM handles http links:
+{{{
+[HKEY_CLASSES_ROOT\htmlfile\DefaultIcon]
+(Default) iexplore.exe,-1003
+
+[HKEY_CLASSES_ROOT\htmlfile\Shell\Open\Command]
+(Default) iexplore.exe file: %1
+
+[HKEY_CLASSES_ROOT\xhtmlfile\DefaultIcon]
+(Default) iexplore.exe,-1003
+
+[HKEY_CLASSES_ROOT\xhtmlfile\Shell\Open\Command]
+(Default) iexplore.exe file: %1
+
+[HKEY_CLASSES_ROOT\gifimage\DefaultIcon]
+(Default) iexplore.exe,-1003
+
+[HKEY_CLASSES_ROOT\gifimage\Shell\Open\Command]
+(Default) iexplore.exe file: %1
+
+[HKEY_CLASSES_ROOT\icoimage\DefaultIcon]
+(Default) iexplore.exe,-1003
+
+[HKEY_CLASSES_ROOT\icoimage\Shell\Open\Command]
+(Default) iexplore.exe file: %1
+
+[HKEY_CLASSES_ROOT\http\DefaultIcon]
+(Default) iexplore.exe,-1003
+
+[HKEY_CLASSES_ROOT\http\Shell\Open\Command]
+(Default) iexplore.exe %1
+
+[HKEY_CLASSES_ROOT\https\DefaultIcon]
+(Default) iexplore.exe,-1003
+
+[HKEY_CLASSES_ROOT\https\Shell\Open\Command]
+(Default) iexplore.exe %1
+
+[HKEY_CLASSES_ROOT\ftp\DefaultIcon]
+(Default) iexplore.exe,-1003
+
+[HKEY_CLASSES_ROOT\ftp\Shell\Open\Command]
+(Default) iexplore.exe %1
+
+[HKEY_CLASSES_ROOT\file\DefaultIcon]
+(Default) iexplore.exe,-1003
+
+[HKEY_CLASSES_ROOT\file\Shell\Open\Command]
+(Default) iexplore.exe %1
+}}}

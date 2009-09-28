@@ -1,0 +1,20 @@
+#summary How you can help
+
+= How can I help? = 
+
+During the development of PockeTwit, I've had several users who were so excited with the application that they wanted to contribute in some way.  There are several things users can do to show their appreciation of the product:
+
+== Provide Feedback ==
+
+I love to hear from the users and welcome all comments and critiques.  Please feel free to send an @reply to @PockeTwitDev on either Twitter or Identi.ca telling me what you think!
+
+== Sponsorship == 
+
+Some users have expressed an interest in making a token financial donationion to the project. Rather than simply accepting donations, I've set up a "Sponsor" system in the application.  Anyone who makes a [https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=pocketwitdev%40gmail%2ecom&lc=US&item_name=PockeTwit&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted PayPal donation] may have their account listed in the Contributors section of the application.  Users of PockeTwit will see your sponsorship as an important contribution to the development of the application and will be able to easily contact/follow you if they like.
+
+You can apply for sponsorship by donating throught the Paypal button below. Then please send an email to pocketwitdev@gmail.com listing your twitter username if you would like to be listed in the program as a Sponsor.  And of course you may keep your donation anonymous if you prefer.
+
+[https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=pocketwitdev%40gmail%2ecom&lc=US&item_name=PockeTwit&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif]
+== Code ==
+
+PockeTwit is open-source and I gladly take code contributions from those who are able and willing. Send me an email at pocketwitdev@gmail.com with your ideas and we can work out how best to get your code integrated into the application!

@@ -1,0 +1,5 @@
+= UserVoice =
+
+You can make [http://pocketwit.uservoice.com/pages/general feature requests] and [http://pocketwit.uservoice.com/pages/issues report bugs] at http://pocketwit.uservoice.com.
+
+If you want help with a specific problem, you may also email pocketwitdev @ gmail.com

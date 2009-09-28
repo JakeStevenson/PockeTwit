@@ -1,0 +1,5 @@
+C:\Users\mws\Development\GroceryList35Installer\CustomInstallLibCS2\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\mws\Development\GroceryList35Installer\CustomInstallLibCS2\bin\Debug\CustomInstallLibCS2.dll
+C:\Users\mws\Development\GroceryList35Installer\CustomInstallLibCS2\bin\Debug\CustomInstallLibCS2.pdb
+C:\Users\mws\Development\GroceryList35Installer\CustomInstallLibCS2\obj\Debug\CustomInstallLibCS2.dll
+C:\Users\mws\Development\GroceryList35Installer\CustomInstallLibCS2\obj\Debug\CustomInstallLibCS2.pdb

@@ -1,0 +1,106 @@
+#summary This page describes the support for Fanfou in PockeTwit
+
+= Introduction 简介 =
+
+Fanfou (www.fanfou.com) is one of the most famous Twitter like micro blog service provider in China. This page will summarize the current status of Fanfou support in PockeTwit. 
+
+饭否 (www.fanfou.com) 是中国知名的微博客服务提供商之一，本页面上介绍PockeTwit对饭否的支持情况。
+
+= Download 下载 = 
+
+Currently, we have only released a preview version of PockeTwit with Fanfou support. You can download it at the Downloads section in this project, or get it directly from the following URL:
+
+http://pocketwit.googlecode.com/files/PockeTwitFanfou.Preview.r1761.CAB
+
+* CAUTION: This is a preview version of the software, use at your own risk. *
+
+目前，我们只发布了一个支持饭否的PockeTwit的预览版本。您可以在本项目的下载页面上下载到它，也可以直接从下面的URL上下载。
+
+http://pocketwit.googlecode.com/files/PockeTwitFanfou.Preview.r1761.CAB
+
+同时提供国内镜像服务器上文件的下载，如果上面的链接无法使用，请从下面的链接下载：
+
+http://www.freemindworld.com/PockeTwitFanfou.Preview.r1761.CAB
+
+* 注意：这只是一个预览版本的软件，仅用于体验和试验，我们不对其功能和可能出现的问题做任何保证 *
+
+You can also use bar code reader software to read the following bar code to download the software:
+
+你可以用手机上的条码识别软件读取下面的二维条码直接下载文件：
+
+http://encode.i-nigma.com/QRCode/img.php?d=URL%3Ahttp%3A%2F%2Fpocketwit.googlecode.com%2Ffiles%2FPockeTwitFanfou.Preview.r1761.CAB&c=&s=4&nouse=barcode.png
+
+= Usage 使用方法 =
+
+Get the CAB installation package and send it to your Windows Mobile. Install it.
+
+After that you will have three component on your device:
+
+PockeTwit: The main program of PockeTwit. 
+PockeTwit QuickPost: The Quick Post program which can be used to send message directly.
+PockeTwit Today Plugin: Put PockeTwit on the Today screen. 
+
+When you start PoweTwit for the first time, it will ask you to configure the account. You can select from multiple service provider and set up several accounts together. For Fanfou account, select "Fanfou" from the service provider list. 
+
+下载CAB文件并上传到Windows Mobile设备上，安装。
+
+安装完成后，设备上会多出三项功能：
+
+PockeTwit: PockeTwit的主程序，包含完整的功能。
+PockeTwit QuickPost: 用于快速发布消息（更新状态）的小程序。
+PockeTwit今日插件: PockeTwit在“今日”上的插件。位于“设置->个人->今日->项目”。
+
+在第一次启动PockeTwit时，它会要求你设置帐号。你可以设置多个来自不同服务商的帐号。对于饭否用户，请在服务商列表中选择“Fanfou”。
+
+= Known Issues 已知问题 =
+
+  # Click on @ link in status will not work. Because Fanfou use screen name instead of ID for @ syntax and there is no way to find out one's ID via his screen name.
+  # Some UI or message has not been localized. 
+  # Basic support for Direct Message. Use "d UserID Message" when posting status update to send direct message. Compare to the "@" function, there is a space after "d" and you should use user ID instead of user's screen name to send direct message. 
+  # Search is not supported
+
+  # 在主界面的上@链接不能正常打开。因为饭否＠后面跟的是昵称而不是用户ID，并且饭否API中无法通过昵称查到ID，所以点击@链接不能正常的找到对应用户的页面。
+  # 有些界面和提示仍然是英文的，没有完全汉化。
+  # 部分支持发私信的功能，通过在发布状态更新时使用“d 用户ID 消息内容”的方式，就可以发送私信。注意与@功能用法的不同，d后面有一个空格，并且是使用用户ID而不是用户的昵称来发送。
+  # 暂时不支持搜索消息的功能
+
+= FAQ 常见问题 =
+
+*Q:* Why GPS position seems to be inaccurate on Google map.
+
+*A:* For some reason, the map provided by Google in China is not accurate according to GPS position. You can switch to English version of Google and use satellite map to see your position, the result will be much better. 
+
+*Q:* 为什么GPS定位看上去很不准确？
+
+*A:* 由于众所周知的原因，Google在中国国内提供的地图的坐标跟GPS实际坐标是有一些误差的。解决的方法是切换到英文版的Google地图，并查看卫星视图。在那上面，位置是相当准确的。
+
+
+= Change History 更新历史 =
+
+2009-06-22 First preview release. 
+
+2009-06-24 Second preview release. Add support for Direct Message and photo uploading.
+
+2009-06-22 第一个预览版本发布。
+
+2009-06-24 第二个预览版本(r1761)发布。增加对私信和照片上传的支持。
+
+= Development Status 开发情况 =
+
+The development of Fanfou support started since June 18, 2009. The major developer of this feature is Li Fanxi (Website: http://www.freemindworld.com, Fanfou: http://fanfou.com/lifanxi, Twitter: http://twitter.com/lifanxi)
+
+Currently, the development is performed on a separated tree in PockeTwit Subversion repository. The development focuses on two aspects: 
+
+  * Fanfou support
+  * Localized version for Chinese user
+
+These changes will be merged to the main trunk after they become stable and maintainable. 
+
+PockeTwit对饭否支持的开发工作开始于2009年6月18日。目前主要的开发人员是李凡希 (网站：http://www.freemindworld.com 饭否页面：http://fanfou.com/lifanxi Twitter页面：http://twitter.com/lifanxi )
+
+目前，PockeTwit对饭否的支持在PockeTwit的Subversion中的一个分支上进行开发，开发主要包括两个方面的内容：
+
+  * 饭否功能的支持
+  * 软件的汉化
+
+这些改动在基本稳定并适合做进一步维护后，最终会合并到PockeTwit的主干上，作为官方PockeTwit的一部分一起发布。

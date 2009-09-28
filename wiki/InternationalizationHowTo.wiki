@@ -1,0 +1,27 @@
+#summary A page describing how to create the internationalization files for the UI
+
+= Introduction =
+
+PockeTwit finally has the ability to display the text within its UI for multiple languages, but we need your help.  We'll need you to take this template XML file and insert the appropriate words and phrases for your language.
+
+
+= Details =
+To submit a UI translation file for your language, [http://pocketwit.googlecode.com/svn/trunk/PockeTwit/Localization/pocketwit_de.xml please download the XML file from here].  You may want to post a comment on this page too, so others know what languages are already being worked on.
+
+Rename the XML file using the [2-letter ISO code for the language you'll be working with.  For example, "pocketwit_en.xml" for English or "pocketwit_de.xml" for German.
+
+Open the XML file using whatever text editor you prefer (even notepad) and start replacing the "localized" values with the appropriate text for your language.  *DO NOT REPLACE THE "name" VALUES, THESE ARE USED TO DETERMINE WHERE THE TEXT BELONGS IN THE UI.*  
+
+You probably want to keep your translated text as close to the same length as the original text as you can to make sure it will fit on the screen.
+
+You will notice that some texts have numbers within curly braces like this: 
+
+`"about {0} {1} ago."`
+
+These numbers will be substituted with the appropriate values by the program, so be sure to keep them intact within your translation like this:
+
+`"vor ca. {0} {1}."`
+
+To test the file, you must use the latest dev build of PockeTwit and save the file to the "Localization" subfolder in the application folder.  You can switch languages using Settings >> UI in the application.
+
+Once you're satisfied with your translation, email the XML file to me for inclusion in the next release!
