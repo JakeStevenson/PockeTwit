@@ -15,8 +15,8 @@ namespace PockeTwit.MediaServices
         private static volatile TweetPhoto _instance;
         private static object syncRoot = new Object();
 
-        private const string API_UPLOAD = "http://www.tweetphoto.com/uploadapiwithkey.php";
-        private const string API_UPLOAD_POST = "http://www.tweetphoto.com/uploadandpostapiwithkey.php";
+        private const string API_UPLOAD = "http://tweetphotoapi.com/api/tpapi.svc/upload";
+        private const string API_UPLOAD_POST = "http://tweetphotoapi.com/api/tpapi.svc/uploadandpost";
         
         private const string API_SHOW_FORMAT = "http://www.tweetphoto.com/show/medium/{0}";  //The extra / for directly sticking the image-id on.
 
@@ -542,8 +542,10 @@ namespace PockeTwit.MediaServices
 
                 contents.Append(CreateContentPartString(header, "username", ppo.Username));
                 contents.Append(CreateContentPartString(header, "password", ppo.Password));
-                contents.Append(CreateContentPartString(header, "message", ppo.Message));
-                contents.Append(CreateContentPartString(header, "api_key", API_KEY));
+                contents.Append(CreateContentPartString(header, "TPMSG", ppo.Message));
+                contents.Append(CreateContentPartString(header, "TPAPIKEY", API_KEY));
+                contents.Append(CreateContentPartString(header, "TPMIMETYPE ", "image/"+Path.GetExtension(ppo.Filename).ToLower()));
+
 
                 if (!string.IsNullOrEmpty(ppo.Lat) && !string.IsNullOrEmpty(ppo.Lon))
                 {
