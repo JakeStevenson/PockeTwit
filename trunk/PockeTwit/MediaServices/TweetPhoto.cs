@@ -15,8 +15,8 @@ namespace PockeTwit.MediaServices
         private static volatile TweetPhoto _instance;
         private static object syncRoot = new Object();
 
-        private const string API_UPLOAD = "http://tweetphotoapi.com/api/tpapi.svc/upload";
-        private const string API_UPLOAD_POST = "http://tweetphotoapi.com/api/tpapi.svc/uploadandpost";
+        private const string API_UPLOAD = "http://tweetphotoapi.com/api/tpapi.svc/upload2";
+        private const string API_UPLOAD_POST = "http://tweetphotoapi.com/api/tpapi.svc/uploadandpost2";
         
         private const string API_SHOW_FORMAT = "http://www.tweetphoto.com/show/medium/{0}";  //The extra / for directly sticking the image-id on.
 
@@ -531,7 +531,7 @@ namespace PockeTwit.MediaServices
                 request.Credentials = new NetworkCredential(ppo.Username, ppo.Password);
                 request.Headers.Add("Accept-Language", "cs,en-us;q=0.7,en;q=0.3");
                 request.PreAuthenticate = true;
-                request.ContentType = string.Format("multipart/form-data;boundary={0}", boundary);
+                request.ContentType = string.Format("application/x-www-form-urlencoded");
 
                 request.Method = "POST";
                 request.Timeout = 20000;
