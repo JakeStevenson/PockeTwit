@@ -136,16 +136,18 @@ namespace PockeTwit.MediaServices
                         {
                             return;
                         }
-
-                        if (uploadResult.SelectSingleNode("rsp").Attributes["status"].Value == "fail")
+                        var nm = new XmlNamespaceManager(uploadResult.NameTable);
+                        nm.AddNamespace("tweetPhoto", "http://tweetphotoapi.com");
+                        if (uploadResult.SelectSingleNode("//tweetPhoto:Status",nm).InnerText!= "OK")
                         {
                             string errorText = uploadResult.SelectSingleNode("//err").Attributes["msg"].Value;
                             OnErrorOccured(new PictureServiceEventArgs(PictureServiceErrorLevel.Failed, string.Empty, errorText));
                         }
                         else
                         {
-                            string url = uploadResult.SelectSingleNode("//mediaurl").InnerText;
-                            OnUploadFinish(new PictureServiceEventArgs(PictureServiceErrorLevel.OK, url, string.Empty, postData.Filename));
+                            string url = uploadResult.SelectSingleNode("//MediaUrl").InnerText;
+                            OnUploadFinish(new PictureServiceEventArgs(PictureServiceErrorLevel.OK, url, string.Empty,
+                                                                       postData.Filename));
                         }
                     }
                 }
@@ -228,14 +230,14 @@ namespace PockeTwit.MediaServices
 
                     postData.PictureData = incoming;
                     XmlDocument uploadResult = UploadPictureMessage(API_UPLOAD_POST, postData);
-
                     if (uploadResult == null)
                     {
                         //event allready thrown in upload.
                         return false;
                     }
-
-                    if (uploadResult.SelectSingleNode("rsp").Attributes["status"].Value == "fail")
+                    var nm = new XmlNamespaceManager(uploadResult.NameTable);
+                    nm.AddNamespace("tweetPhoto", "http://tweetphotoapi.com");
+                    if (uploadResult.SelectSingleNode("//tweetPhoto:Status",nm).InnerText!= "OK")
                     {
                         string errorText = uploadResult.SelectSingleNode("//err").Attributes["msg"].Value;
                         OnErrorOccured(new PictureServiceEventArgs(PictureServiceErrorLevel.Failed, string.Empty, errorText));
@@ -322,20 +324,22 @@ namespace PockeTwit.MediaServices
             {
                 XmlDocument uploadResult = UploadPictureMessage(API_UPLOAD, _workerPpo);
 
-                if (uploadResult.SelectSingleNode("rsp").Attributes["status"].Value == "fail")
+                var nm = new XmlNamespaceManager(uploadResult.NameTable);
+                nm.AddNamespace("tweetPhoto", "http://tweetphotoapi.com");
+                if (uploadResult.SelectSingleNode("//tweetPhoto:Status", nm).InnerText != "OK")
                 {
                     string errorText = uploadResult.SelectSingleNode("//err").Attributes["msg"].Value;
                     OnErrorOccured(new PictureServiceEventArgs(PictureServiceErrorLevel.Failed, string.Empty, errorText));
                 }
                 else
                 {
-                    string url = uploadResult.SelectSingleNode("//mediaurl").InnerText;
+                    string url = uploadResult.SelectSingleNode("//MediaURL").InnerText;
                     OnUploadFinish(new PictureServiceEventArgs(PictureServiceErrorLevel.OK, url, string.Empty, _workerPpo.Filename));
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                OnErrorOccured(new PictureServiceEventArgs(PictureServiceErrorLevel.Failed, string.Empty, API_ERROR_UPLOAD));
+                OnErrorOccured(new PictureServiceEventArgs(PictureServiceErrorLevel.Failed, ex.Message, API_ERROR_UPLOAD));
             }
             _workerThread = null;
         }
@@ -510,10 +514,10 @@ namespace PockeTwit.MediaServices
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 //Socket exception 10054 could occur when sending large files.
-                OnErrorOccured(new PictureServiceEventArgs(PictureServiceErrorLevel.Failed, string.Empty, API_ERROR_UPLOAD));
+                OnErrorOccured(new PictureServiceEventArgs(PictureServiceErrorLevel.Failed, ex.Message, API_ERROR_UPLOAD));
                 return null;
             }
 

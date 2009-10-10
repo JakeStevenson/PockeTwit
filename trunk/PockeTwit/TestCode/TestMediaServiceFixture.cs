@@ -16,10 +16,10 @@ namespace PockeTwit.TestCode
                           {
                               Filename = testFile,
                               Message = "Test upload",
-                              Username = "someone",  //REPLACE WITH YOUR OWN TEST ACCOUNT INFO
-                              Password = "somepass"
+                              Username = "pocketwitest",  //REPLACE WITH YOUR OWN TEST ACCOUNT INFO
+                              Password = "wms4ftr"
                           };
-            service.PostPictureMessage(ppo);
+            Assert.IsTrue(service.PostPictureMessage(ppo));
 
         }
     }
