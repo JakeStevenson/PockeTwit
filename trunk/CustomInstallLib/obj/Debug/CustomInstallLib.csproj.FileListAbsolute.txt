@@ -8,3 +8,8 @@ C:\Users\jakes\Documents\Visual Studio 2008\Projects\PockeTwit Trunk\CustomInsta
 C:\Users\jakes\Documents\Visual Studio 2008\Projects\PockeTwit Trunk\CustomInstallLib\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\jakes\Documents\Visual Studio 2008\Projects\PockeTwit Trunk\CustomInstallLib\obj\Debug\CustomInstallLib.dll
 C:\Users\jakes\Documents\Visual Studio 2008\Projects\PockeTwit Trunk\CustomInstallLib\obj\Debug\CustomInstallLib.pdb
+C:\Users\jakes\Documents\Visual Studio 2008\Projects\pocketwitgit\svn\trunk\CustomInstallLib\bin\Debug\CustomInstallLib.dll
+C:\Users\jakes\Documents\Visual Studio 2008\Projects\pocketwitgit\svn\trunk\CustomInstallLib\bin\Debug\CustomInstallLib.pdb
+C:\Users\jakes\Documents\Visual Studio 2008\Projects\pocketwitgit\svn\trunk\CustomInstallLib\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\jakes\Documents\Visual Studio 2008\Projects\pocketwitgit\svn\trunk\CustomInstallLib\obj\Debug\CustomInstallLib.dll
+C:\Users\jakes\Documents\Visual Studio 2008\Projects\pocketwitgit\svn\trunk\CustomInstallLib\obj\Debug\CustomInstallLib.pdb
