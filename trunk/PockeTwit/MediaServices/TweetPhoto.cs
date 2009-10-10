@@ -2,8 +2,6 @@
 using System.IO;
 using System.Net;
 using System.Xml;
-using System.Web;
-using System.Collections.Generic;
 using System.Text;
 
 namespace PockeTwit.MediaServices
@@ -13,10 +11,10 @@ namespace PockeTwit.MediaServices
         #region private properties
 
         private static volatile TweetPhoto _instance;
-        private static object syncRoot = new Object();
+        private static readonly object SyncRoot = new Object();
 
         private const string API_UPLOAD = "http://tweetphotoapi.com/api/tpapi.svc/upload2";
-        private const string API_UPLOAD_POST = "http://tweetphotoapi.com/api/tpapi.svc/uploadandpost2";
+        private const string API_UPLOAD_POST = "http://tweetphotoapi.com/api/tpapi.svc/upload2";
         
         private const string API_SHOW_FORMAT = "http://www.tweetphoto.com/show/medium/{0}";  //The extra / for directly sticking the image-id on.
 
@@ -25,14 +23,12 @@ namespace PockeTwit.MediaServices
 
         private const string API_KEY = "cd6fa2df805addb613d06a91f24bdf01";
 
-        private string requestedUrl = string.Empty;
-
         #endregion
 
         #region private objects
 
-        private System.Threading.Thread workerThread;
-        private PicturePostObject workerPPO;
+        private System.Threading.Thread _workerThread;
+        private PicturePostObject _workerPpo;
 
         #endregion
 
@@ -67,12 +63,11 @@ namespace PockeTwit.MediaServices
             {
                 if (_instance == null)
                 {
-                    lock (syncRoot)
+                    lock (SyncRoot)
                     {
                         if (_instance == null)
                         {
-                            _instance = new TweetPhoto();
-                            _instance.HasEventHandlersSet = false;
+                            _instance = new TweetPhoto {HasEventHandlersSet = false};
                         }
                     }
                 }
@@ -108,24 +103,23 @@ namespace PockeTwit.MediaServices
 
             #endregion
 
-            using (System.IO.FileStream file = new FileStream(postData.Filename, FileMode.Open, FileAccess.Read))
+            using (var file = new FileStream(postData.Filename, FileMode.Open, FileAccess.Read))
             {
                 try
                 {
                     //Load the picture data
-                    byte[] incoming = new byte[file.Length];
+                    var incoming = new byte[file.Length];
                     file.Read(incoming, 0, incoming.Length);
 
                     if (postData.UseAsync)
                     {
-                        workerPPO = (PicturePostObject)postData.Clone();
-                        workerPPO.PictureData = incoming;
+                        _workerPpo = (PicturePostObject)postData.Clone();
+                        _workerPpo.PictureData = incoming;
 
-                        if (workerThread == null)
+                        if (_workerThread == null)
                         {
-                            workerThread = new System.Threading.Thread(new System.Threading.ThreadStart(ProcessUpload));
-                            workerThread.Name = "PictureUpload";
-                            workerThread.Start();
+                            _workerThread = new System.Threading.Thread(ProcessUpload){Name = "PictureUpload"};
+                            _workerThread.Start();
                         }
                         else
                         {
@@ -136,7 +130,7 @@ namespace PockeTwit.MediaServices
                     {
                         //use sync.
                         postData.PictureData = incoming;
-                        XmlDocument uploadResult = UploadPicture(API_UPLOAD, postData);
+                        XmlDocument uploadResult = UploadPictureMessage(API_UPLOAD, postData);
 
                         if (uploadResult == null)
                         {
@@ -145,13 +139,13 @@ namespace PockeTwit.MediaServices
 
                         if (uploadResult.SelectSingleNode("rsp").Attributes["status"].Value == "fail")
                         {
-                            string ErrorText = uploadResult.SelectSingleNode("//err").Attributes["msg"].Value;
-                            OnErrorOccured(new PictureServiceEventArgs(PictureServiceErrorLevel.Failed, string.Empty, ErrorText));
+                            string errorText = uploadResult.SelectSingleNode("//err").Attributes["msg"].Value;
+                            OnErrorOccured(new PictureServiceEventArgs(PictureServiceErrorLevel.Failed, string.Empty, errorText));
                         }
                         else
                         {
-                            string URL = uploadResult.SelectSingleNode("//mediaurl").InnerText;
-                            OnUploadFinish(new PictureServiceEventArgs(PictureServiceErrorLevel.OK, URL, string.Empty, postData.Filename));
+                            string url = uploadResult.SelectSingleNode("//mediaurl").InnerText;
+                            OnUploadFinish(new PictureServiceEventArgs(PictureServiceErrorLevel.OK, url, string.Empty, postData.Filename));
                         }
                     }
                 }
@@ -180,14 +174,12 @@ namespace PockeTwit.MediaServices
 
             try
             {
-                workerPPO = new PicturePostObject();
-                workerPPO.Message = pictureURL;
+                _workerPpo = new PicturePostObject {Message = pictureURL};
 
-                if (workerThread == null)
+                if (_workerThread == null)
                 {
-                    workerThread = new System.Threading.Thread(new System.Threading.ThreadStart(ProcessDownload));
-                    workerThread.Name = "PictureUpload";
-                    workerThread.Start();
+                    _workerThread = new System.Threading.Thread(ProcessDownload){Name = "PictureUpload"};
+                    _workerThread.Start();
                 }
                 else
                 {
@@ -226,12 +218,12 @@ namespace PockeTwit.MediaServices
 
             #endregion
 
-            using (System.IO.FileStream file = new FileStream(postData.Filename, FileMode.Open, FileAccess.Read))
+            using (var file = new FileStream(postData.Filename, FileMode.Open, FileAccess.Read))
             {
                 try
                 {
                     //Load the picture data
-                    byte[] incoming = new byte[file.Length];
+                    var incoming = new byte[file.Length];
                     file.Read(incoming, 0, incoming.Length);
 
                     postData.PictureData = incoming;
@@ -245,8 +237,8 @@ namespace PockeTwit.MediaServices
 
                     if (uploadResult.SelectSingleNode("rsp").Attributes["status"].Value == "fail")
                     {
-                        string ErrorText = uploadResult.SelectSingleNode("//err").Attributes["msg"].Value;
-                        OnErrorOccured(new PictureServiceEventArgs(PictureServiceErrorLevel.Failed, string.Empty, ErrorText));
+                        string errorText = uploadResult.SelectSingleNode("//err").Attributes["msg"].Value;
+                        OnErrorOccured(new PictureServiceEventArgs(PictureServiceErrorLevel.Failed, string.Empty, errorText));
                         return false;
                     }
                 }
@@ -298,8 +290,8 @@ namespace PockeTwit.MediaServices
         {
             try
             {
-                string pictureURL = workerPPO.Message;
-                string imageID = string.Empty;
+                string pictureURL = _workerPpo.Message;
+                string imageID;
                 if (IsRedirect(pictureURL))
                 {
                     imageID = GetRedirectUrl(pictureURL);
@@ -321,31 +313,31 @@ namespace PockeTwit.MediaServices
             {
                 OnErrorOccured(new PictureServiceEventArgs(PictureServiceErrorLevel.Failed, string.Empty, API_ERROR_DOWNLOAD));
             }
-            workerThread = null;
+            _workerThread = null;
         }
 
         private void ProcessUpload()
         {
             try
             {
-                XmlDocument uploadResult = UploadPicture(API_UPLOAD, workerPPO);
+                XmlDocument uploadResult = UploadPictureMessage(API_UPLOAD, _workerPpo);
 
                 if (uploadResult.SelectSingleNode("rsp").Attributes["status"].Value == "fail")
                 {
-                    string ErrorText = uploadResult.SelectSingleNode("//err").Attributes["msg"].Value;
-                    OnErrorOccured(new PictureServiceEventArgs(PictureServiceErrorLevel.Failed, string.Empty, ErrorText));
+                    string errorText = uploadResult.SelectSingleNode("//err").Attributes["msg"].Value;
+                    OnErrorOccured(new PictureServiceEventArgs(PictureServiceErrorLevel.Failed, string.Empty, errorText));
                 }
                 else
                 {
-                    string URL = uploadResult.SelectSingleNode("//mediaurl").InnerText;
-                    OnUploadFinish(new PictureServiceEventArgs(PictureServiceErrorLevel.OK, URL, string.Empty, workerPPO.Filename));
+                    string url = uploadResult.SelectSingleNode("//mediaurl").InnerText;
+                    OnUploadFinish(new PictureServiceEventArgs(PictureServiceErrorLevel.OK, url, string.Empty, _workerPpo.Filename));
                 }
             }
             catch
             {
                 OnErrorOccured(new PictureServiceEventArgs(PictureServiceErrorLevel.Failed, string.Empty, API_ERROR_UPLOAD));
             }
-            workerThread = null;
+            _workerThread = null;
         }
 
         #endregion
@@ -358,7 +350,7 @@ namespace PockeTwit.MediaServices
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        private bool IsRedirect(string toCheckUrl)
+        private static bool IsRedirect(string toCheckUrl)
         {
             const string siteMarker = "pic.gd";
             string url = toCheckUrl.ToLower();
@@ -366,7 +358,7 @@ namespace PockeTwit.MediaServices
             return (url.IndexOf(siteMarker) >= 0);
         }
 
-        private bool IsTweetPhoto(string toCheckUrl)
+        private static bool IsTweetPhoto(string toCheckUrl)
         {
             const string siteMarker = "tweetphoto";
             string url = toCheckUrl.ToLower();
@@ -374,11 +366,11 @@ namespace PockeTwit.MediaServices
             return (url.IndexOf(siteMarker) >= 0);
         }
 
-        private string GetRedirectUrl(string url)
+        private static string GetRedirectUrl(string url)
         {
             HttpWebRequest myRequest = WebRequestFactory.CreateHttpRequest(url);
-            string responseUri = string.Empty;
-            using (HttpWebResponse response = (HttpWebResponse)myRequest.GetResponse())
+            string responseUri;
+            using (var response = (HttpWebResponse)myRequest.GetResponse())
             {
                 responseUri = response.ResponseUri.ToString();
                 response.Close();
@@ -403,19 +395,18 @@ namespace PockeTwit.MediaServices
             {
                 HttpWebRequest myRequest = WebRequestFactory.CreateHttpRequest(string.Format(API_SHOW_FORMAT, imageId));
                 myRequest.Method = "GET";
-                String pictureFileName = String.Empty;
+                String pictureFileName;
 
-                using (HttpWebResponse response = (HttpWebResponse)myRequest.GetResponse())
+                using (var response = (HttpWebResponse)myRequest.GetResponse())
                 {
                     using (Stream dataStream = response.GetResponseStream())
                     {
-                        int totalSize = 0;
-                        int totalResponseSize = (int)response.ContentLength;
-                        byte[] readBuffer = new byte[PT_READ_BUFFER_SIZE];
+                        var totalResponseSize = (int)response.ContentLength;
+                        var readBuffer = new byte[PT_READ_BUFFER_SIZE];
                         pictureFileName = GetPicturePath(imageId);
 
                         int responseSize = dataStream.Read(readBuffer, 0, PT_READ_BUFFER_SIZE);
-                        totalSize = responseSize;
+                        int totalSize = responseSize;
                         OnDownloadPart(new PictureServiceEventArgs(responseSize, totalSize, totalResponseSize));
                         while (responseSize > 0)
                         {
@@ -452,69 +443,7 @@ namespace PockeTwit.MediaServices
         /// <param name="url">URL to upload picture to</param>
         /// <param name="ppo">Postdata</param>
         /// <returns></returns>
-        private XmlDocument UploadPicture(string url, PicturePostObject ppo)
-        {
-            try
-            {
-                HttpWebRequest request = WebRequestFactory.CreateHttpRequest(url);
-
-                string boundary = System.Guid.NewGuid().ToString();
-                request.Credentials = new NetworkCredential(ppo.Username, ppo.Password);
-                request.Headers.Add("Accept-Language", "cs,en-us;q=0.7,en;q=0.3");
-                request.PreAuthenticate = true;
-                request.ContentType = string.Format("multipart/form-data;boundary={0}", boundary);
-
-                //request.ContentType = "application/x-www-form-urlencoded";
-                request.Method = "POST";
-                request.Timeout = 20000;
-                string header = string.Format("--{0}", boundary);
-                string ender = "\r\n" + header + "\r\n";
-
-                StringBuilder contents = new StringBuilder();
-
-                contents.Append(CreateContentPartString(header, "username", ppo.Username));
-                contents.Append(CreateContentPartString(header, "password", ppo.Password));
-                contents.Append(CreateContentPartString(header, "api_key", API_KEY));
-
-                int imageIdStartIndex = ppo.Filename.LastIndexOf('\\') + 1;
-                string filename = ppo.Filename.Substring(imageIdStartIndex, ppo.Filename.Length - imageIdStartIndex);
-                contents.Append(CreateContentPartPicture(header, filename));
-
-                //Create the form message to send in bytes
-                byte[] message = Encoding.UTF8.GetBytes(contents.ToString());
-                byte[] footer = Encoding.UTF8.GetBytes(ender);
-                request.ContentLength = message.Length + ppo.PictureData.Length + footer.Length;
-                using (Stream requestStream = request.GetRequestStream())
-                {
-                    requestStream.Write(message, 0, message.Length);
-                    requestStream.Write(ppo.PictureData, 0, ppo.PictureData.Length);
-                    requestStream.Write(footer, 0, footer.Length);
-                    requestStream.Flush();
-                    requestStream.Close();
-
-                    using (WebResponse response = request.GetResponse())
-                    {
-                        using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-                        {
-                            XmlDocument responseXML = new XmlDocument();
-                            string rsp = reader.ReadToEnd();
-                            responseXML.LoadXml(rsp);
-                            return responseXML;
-                        }
-                    }
-                }
-
-            }
-            catch
-            {
-                //Socket exception 10054 could occur when sending large files.
-
-                OnErrorOccured(new PictureServiceEventArgs(PictureServiceErrorLevel.Failed, string.Empty, API_ERROR_UPLOAD));
-                return null;
-            }
-        }
-
-
+        
         /// <summary>
         /// Upload the picture
         /// </summary>
@@ -526,54 +455,53 @@ namespace PockeTwit.MediaServices
             try
             {
                 HttpWebRequest request = WebRequestFactory.CreateHttpRequest(url);
-
-                string boundary = System.Guid.NewGuid().ToString();
-                request.Credentials = new NetworkCredential(ppo.Username, ppo.Password);
-                request.Headers.Add("Accept-Language", "cs,en-us;q=0.7,en;q=0.3");
-                request.PreAuthenticate = true;
                 request.ContentType = string.Format("application/x-www-form-urlencoded");
-
+                request.Headers.Add("Authorization", String.Format("Basic {0}",
+                    Convert.ToBase64String(
+                        Encoding.Default.GetBytes(
+                            String.Format("{0}:{1}", ppo.Username, ppo.Password)
+                            )
+                        )));
                 request.Method = "POST";
-                request.Timeout = 20000;
-                string header = string.Format("--{0}", boundary);
-                string ender = "\r\n" + header + "\r\n";
-
-                StringBuilder contents = new StringBuilder();
-
-                contents.Append(CreateContentPartString(header, "username", ppo.Username));
-                contents.Append(CreateContentPartString(header, "password", ppo.Password));
-                contents.Append(CreateContentPartString(header, "TPMSG", ppo.Message));
-                contents.Append(CreateContentPartString(header, "TPAPIKEY", API_KEY));
-                contents.Append(CreateContentPartString(header, "TPMIMETYPE ", "image/"+Path.GetExtension(ppo.Filename).ToLower()));
-
+                request.Headers.Add("TPUTF8", Boolean.TrueString);
+                if (!string.IsNullOrEmpty(ppo.Message))
+                {
+                    request.Headers.Add("TPMSG", GetUTF8EncodedHeaderString(ppo.Message));
+                }
+                request.Headers.Add("TPAPIKEY", API_KEY);
+                request.Headers.Add("TPMIMETYPE", "image/"+Path.GetExtension(ppo.Filename).ToLower().Substring(1));
+                request.Headers.Add("TPPOST", (!string.IsNullOrEmpty(ppo.Message)).ToString());
 
                 if (!string.IsNullOrEmpty(ppo.Lat) && !string.IsNullOrEmpty(ppo.Lon))
                 {
-                    contents.Append(CreateContentPartString(header, "longitude", ppo.Lon));
-                    contents.Append(CreateContentPartString(header, "latitude", ppo.Lat));
+                    request.Headers.Add("longitude", ppo.Lon);
+                    request.Headers.Add("latitude", ppo.Lat);
                 }
 
-                int imageIdStartIndex = ppo.Filename.LastIndexOf('\\') + 1;
-                string filename = ppo.Filename.Substring(imageIdStartIndex, ppo.Filename.Length - imageIdStartIndex);
-                contents.Append(CreateContentPartPicture(header, filename));
-
                 //Create the form message to send in bytes
-                byte[] message = Encoding.UTF8.GetBytes(contents.ToString());
-                byte[] footer = Encoding.UTF8.GetBytes(ender);
-                request.ContentLength = message.Length + ppo.PictureData.Length + footer.Length;
+                //byte[] message = Encoding.UTF8.GetBytes(ppo.PictureData);
+                request.ContentLength = ppo.PictureData.Length;
+                request.Timeout = 1000 * 60 * 3;  //3 minute time out
                 using (Stream requestStream = request.GetRequestStream())
                 {
-                    requestStream.Write(message, 0, message.Length);
-                    requestStream.Write(ppo.PictureData, 0, ppo.PictureData.Length);
-                    requestStream.Write(footer, 0, footer.Length);
+                    const int len = 1024 * 64;
+                    for (int i = 0; i < ppo.PictureData.Length; i += len)
+                    {
+                        int writeLen = len;
+                        if ((i + len) > ppo.PictureData.Length)
+                        {
+                            writeLen = ppo.PictureData.Length - i;
+                        }
+                        requestStream.Write(ppo.PictureData, i, writeLen);
+                    }
                     requestStream.Flush();
                     requestStream.Close();
 
                     using (WebResponse response = request.GetResponse())
                     {
-                        using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                        using (var reader = new StreamReader(response.GetResponseStream()))
                         {
-                            XmlDocument responseXML = new XmlDocument();
+                            var responseXML = new XmlDocument();
                             string rsp = reader.ReadToEnd();
                             responseXML.LoadXml(rsp);
                             return responseXML;
@@ -595,33 +523,10 @@ namespace PockeTwit.MediaServices
 
         #region helper mehtods
 
-        private string CreateContentPartString(string header, string dispositionName, string valueToSend)
+        static string GetUTF8EncodedHeaderString(string str)
         {
-            StringBuilder contents = new StringBuilder();
-
-            contents.Append(header);
-            contents.Append("\r\n");
-            contents.Append(String.Format("Content-Disposition: form-data;name=\"{0}\"\r\n", dispositionName));
-            contents.Append("\r\n");
-            contents.Append(valueToSend);
-            contents.Append("\r\n");
-
-            return contents.ToString();
+            return Convert.ToBase64String(Encoding.UTF8.GetBytes(str));
         }
-
-        private string CreateContentPartPicture(string header, string filename)
-        {
-            StringBuilder contents = new StringBuilder();
-
-            contents.Append(header);
-            contents.Append("\r\n");
-            contents.Append(string.Format("content-disposition:form-data; name=\"media\";filename=\"{0}\"\r\n", filename));
-            contents.Append("Content-Type: image/jpeg\r\n");
-            contents.Append("\r\n");
-
-            return contents.ToString();
-        }
-
 
         #endregion
     }
