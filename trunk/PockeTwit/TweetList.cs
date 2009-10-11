@@ -1,12 +1,8 @@
 using System;
 
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using System.Xml.Serialization;
 using PockeTwit.FingerUI;
 using PockeTwit.FingerUI.Menu;
 using PockeTwit.Library;
@@ -15,7 +11,6 @@ using PockeTwit.NotificationsCode;
 using PockeTwit.OtherServices;
 using PockeTwit.SpecialTimelines;
 using PockeTwit.TimeLines;
-using Microsoft.WindowsCE.Forms;
 using Yedda;
 
 
@@ -26,8 +21,8 @@ namespace PockeTwit
         private class HistoryItem
         {
             public string Argument;
-            public Yedda.Twitter.ActionType Action;
-            public Yedda.Twitter.Account Account;
+            public Twitter.ActionType Action;
+            public Twitter.Account Account;
             public int SelectedItemIndex = -1;
             public int itemsOffset = -1;
             public object ItemInfo = null;
