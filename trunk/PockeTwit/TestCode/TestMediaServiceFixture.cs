@@ -20,7 +20,16 @@ namespace PockeTwit.TestCode
                               Password = "wms4ftr"
                           };
             Assert.IsTrue(service.PostPictureMessage(ppo));
+        }
 
+        [Test]
+        public void TestDownloadFromTweetPhoto()
+        {
+            var picURL = @"http://pic.gd/ee92b2";
+            var service = PictureServiceFactory.Instance.GetServiceByName("TweetPhoto");
+            if(service.CanFetchUrl(picURL))
+            service.FetchPicture(picURL);
+            
         }
     }
 }

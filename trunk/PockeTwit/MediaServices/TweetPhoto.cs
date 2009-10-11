@@ -15,8 +15,8 @@ namespace PockeTwit.MediaServices
 
         private const string API_UPLOAD = "http://tweetphotoapi.com/api/tpapi.svc/upload2";
         private const string API_UPLOAD_POST = "http://tweetphotoapi.com/api/tpapi.svc/upload2";
-        
-        private const string API_SHOW_FORMAT = "http://www.tweetphoto.com/show/medium/{0}";  //The extra / for directly sticking the image-id on.
+
+        private const string API_SHOW_FORMAT = "http://TweetPhotoAPI.com/api/TPAPI.svc/imagefromurl?size=medium&url={0}";  //The extra / for directly sticking the image-id on.
 
         private const string API_ERROR_UPLOAD = "Unable to upload to TweetPhoto";
         private const string API_ERROR_DOWNLOAD = "Unable to download from TweetPhoto";
@@ -292,23 +292,11 @@ namespace PockeTwit.MediaServices
         {
             try
             {
-                string pictureURL = _workerPpo.Message;
-                string imageID;
-                if (IsRedirect(pictureURL))
-                {
-                    imageID = GetRedirectUrl(pictureURL);
-                }
-                else
-                {
-                    int imageIdStartIndex = pictureURL.LastIndexOf('/') + 1;
-                    imageID = pictureURL.Substring(imageIdStartIndex, pictureURL.Length - imageIdStartIndex);
-                }
-
-                string resultFileName = RetrievePicture(imageID);
+                string resultFileName = RetrievePicture(_workerPpo.Message);
 
                 if (!string.IsNullOrEmpty(resultFileName))
                 {
-                    OnDownloadFinish(new PictureServiceEventArgs(PictureServiceErrorLevel.Failed, resultFileName, string.Empty, pictureURL));
+                    OnDownloadFinish(new PictureServiceEventArgs(PictureServiceErrorLevel.Failed, resultFileName, string.Empty, _workerPpo.Message));
                 }
             }
             catch
@@ -364,28 +352,10 @@ namespace PockeTwit.MediaServices
 
         private static bool IsTweetPhoto(string toCheckUrl)
         {
-            const string siteMarker = "tweetphoto";
+            const string siteMarker = "pic.gd";
             string url = toCheckUrl.ToLower();
 
             return (url.IndexOf(siteMarker) >= 0);
-        }
-
-        private static string GetRedirectUrl(string url)
-        {
-            HttpWebRequest myRequest = WebRequestFactory.CreateHttpRequest(url);
-            string responseUri;
-            using (var response = (HttpWebResponse)myRequest.GetResponse())
-            {
-                responseUri = response.ResponseUri.ToString();
-                response.Close();
-            }
-            string imageID = string.Empty;
-            if (!string.IsNullOrEmpty(responseUri) && IsTweetPhoto(responseUri))
-            {
-                int imageIdStartIndex = responseUri.LastIndexOf('/') + 1;
-                imageID = responseUri.Substring(imageIdStartIndex, responseUri.Length - imageIdStartIndex);
-            }
-            return imageID;
         }
 
         /// <summary>
@@ -434,9 +404,9 @@ namespace PockeTwit.MediaServices
 
                 return pictureFileName;
             }
-            catch
+            catch(Exception ex)
             {
-                OnErrorOccured(new PictureServiceEventArgs(PictureServiceErrorLevel.Failed, string.Empty, API_ERROR_DOWNLOAD));
+                OnErrorOccured(new PictureServiceEventArgs(PictureServiceErrorLevel.Failed, ex.Message, API_ERROR_DOWNLOAD));
                 return string.Empty;
             }
         }
