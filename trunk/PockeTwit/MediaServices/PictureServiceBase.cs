@@ -255,7 +255,7 @@ namespace PockeTwit.MediaServices
 
             String picturePath = String.Empty;
 
-            int imageIdStartIndex = pictureURL.LastIndexOf('?') + 1;
+            int imageIdStartIndex = pictureURL.LastIndexOf('/') + 1;
             string imageId = pictureURL.Substring(imageIdStartIndex, pictureURL.Length - imageIdStartIndex);
 
             string rootpath = string.Empty;

@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Threading;
+using NUnit.Framework;
 using PockeTwit.MediaServices;
 
 namespace PockeTwit.TestCode
@@ -25,11 +26,36 @@ namespace PockeTwit.TestCode
         [Test]
         public void TestDownloadFromTweetPhoto()
         {
+            var waitHandle = new AutoResetEvent(false); 
             var picURL = @"http://pic.gd/ee92b2";
             var service = PictureServiceFactory.Instance.GetServiceByName("TweetPhoto");
+            service.DownloadFinish += delegate(object sender, PictureServiceEventArgs args)
+                                          {
+                                              waitHandle.Set();
+                                              Assert.IsNotEmpty(args.PictureFileName);
+                                          };
+            service.ErrorOccured += delegate(object sender, PictureServiceEventArgs args)
+                                        {
+                                            waitHandle.Set();
+                                            Assert.Fail(args.ErrorMessage);
+                                        };
+
             if(service.CanFetchUrl(picURL))
             service.FetchPicture(picURL);
-            
+            if (!waitHandle.WaitOne(100000, false))
+            {
+                Assert.Fail("Test timed out.");
+            }  
+        }
+
+        void service_ErrorOccured(object sender, PictureServiceEventArgs eventArgs)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        void service_DownloadFinish(object sender, PictureServiceEventArgs eventArgs)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
