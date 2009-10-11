@@ -52,7 +52,7 @@ namespace PockeTwit.Localization
                     System.Globalization.CultureInfo cultureInfo = new CultureInfo(cultureInfoString);
                     result.Add(cultureInfo);
                 }
-                catch()
+                catch
                 {
                     //Unable to use this translation file
                 }
