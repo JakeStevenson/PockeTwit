@@ -45,10 +45,17 @@ namespace PockeTwit.Localization
 
             foreach (string fileName in files)
             {
-                string cultureInfoString = fileName.Substring(fileName.LastIndexOf('_')+1);
-                cultureInfoString = (cultureInfoString.Split('.'))[0];
-                System.Globalization.CultureInfo cultureInfo = new CultureInfo(cultureInfoString);
-                result.Add(cultureInfo);
+                try
+                {
+                    string cultureInfoString = fileName.Substring(fileName.LastIndexOf('_') + 1);
+                    cultureInfoString = (cultureInfoString.Split('.'))[0];
+                    System.Globalization.CultureInfo cultureInfo = new CultureInfo(cultureInfoString);
+                    result.Add(cultureInfo);
+                }
+                catch()
+                {
+                    //Unable to use this translation file
+                }
             }
             return result.AsReadOnly();
         }
